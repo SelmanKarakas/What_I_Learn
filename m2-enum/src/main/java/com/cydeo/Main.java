@@ -34,6 +34,14 @@ public class Main {
                 break;
         }
 
+        System.out.println("Operation Task");
+        calculate(3,5,Operation.MULTIPLY);
+
+        System.out.println("How to retrieve the constant value");
+        System.out.println(Currency.PENNY.getValue());
+        System.out.println(Currency.QUARTER.getValue());
+        System.out.println(Currency.QUARTER.ordinal()); //3 it shows array order
+
     }
 
     private static void calculate(double x, double y, Operation operation){
@@ -53,8 +61,6 @@ public class Main {
                 break;
         }
 
-        System.out.println("Operation Task");
-        calculate(3,5,Operation.MULTIPLY);
 
     }
 
