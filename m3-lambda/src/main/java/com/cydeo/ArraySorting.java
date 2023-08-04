@@ -1,5 +1,7 @@
 package com.cydeo;
 
+import java.util.function.Predicate;
+
 public class ArraySorting {
 
     public static void main(String[] args) {
@@ -11,6 +13,13 @@ public class ArraySorting {
 
         as.sort(qs);
         as.sort(bs);
+
+        Sorting quickSort = () -> System.out.println("Quick Sorting");
+        as.sort(quickSort);
+
+        as.sort(() -> System.out.println("Quick Sorting"));
+
+
 
     }
 
