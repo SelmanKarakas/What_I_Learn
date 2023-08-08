@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static java.util.Comparator.comparing;
 
@@ -45,6 +46,9 @@ public class DishTask {
                 .forEach(System.out::println);
 
         System.out.println("----------------------");
+
+        Stream<Dish> dish = DishData.getAll().stream();
+        dish.filter(Dish::isVegetarian).forEach(System.out::println);
 
 
 
