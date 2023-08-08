@@ -1,4 +1,7 @@
-package com.cydeo.tasks;
+package com.cydeo;
+
+import com.cydeo.tasks.Dish;
+import com.cydeo.tasks.DishData;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
