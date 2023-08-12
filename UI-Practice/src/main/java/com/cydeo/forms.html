@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Forms practice</title>
+</head>
+<body>
+
+<form>
+
+  <p>
+    Username:
+    <input type="text" placeholder="Enter your username" name="Username">
+  </p>
+  <p>
+    Password:
+    <input type="password" placeholder="Enter your password"  name="Password">
+  </p>
+  <p>
+    What did you think of this trip?
+  </p>
+  <textarea cols="30" rows="7" placeholder="Enter text"></textarea>
+  <br>
+  <p>I should sleep:</p>
+  <input type="radio" name="food" value="No">No
+  <input type="radio" name="food" value="yesbutno">yes but no
+  <br>
+  <p>Pick a date
+    <input type="date">
+  </p>
+  <input type="datetime-local">
+
+  <p>
+    Please upload your resume:
+    <br>
+    <input type="file">
+  </p>
+  <p>
+    Please select tour favorite course(s)
+  </p>
+  <label for="java">
+    <input type="checkbox" name="course" value="java" id="java">Java
+  </label>
+
+  <input type="checkbox" name="course" value="DS">DS
+  <input type="checkbox" name="course" value="UI">UI
+  <input type="checkbox" name="course" value="Soft Skill">Soft Skill
+
+  <p>
+    Please select the course:
+  </p>
+  <select name="course">
+      <option value="" disabled selected>Select a course</option>
+      <option value="jd">Java Developer</option>
+      <option value="sdet">Java SDET</option>
+      <option value="cs">Cyber Security</option>
+  </select>
+  <br>
+  <br>
+  <input type="submit" value="Sign Up">
+
+</form>
+
+</body>
+</html>
