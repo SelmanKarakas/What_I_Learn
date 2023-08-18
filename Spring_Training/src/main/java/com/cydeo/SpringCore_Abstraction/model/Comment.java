@@ -1,4 +1,4 @@
-package com.cydeo.model;
+package com.cydeo.SpringCore_Abstraction.model;
 
 import lombok.Data;
 
