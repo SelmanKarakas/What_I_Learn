@@ -1,7 +1,9 @@
 package com.cydeo.SpringCore_Abstraction.repository;
 
 import com.cydeo.SpringCore_Abstraction.model.Comment;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DBCommentRepository implements com.cydeo.SpringCore_Abstraction.repository.CommentRepository {
 
     @Override
