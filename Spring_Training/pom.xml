@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.cydeo</groupId>
-    <artifactId>spring-05-Core-Abstraction</artifactId>
+    <artifactId>spring-06-Core-BeanScope</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -16,14 +16,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.28</version>
+            <version>5.3.22</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
+            <version>1.18.24</version>
         </dependency>
     </dependencies>
-
 
 </project>
