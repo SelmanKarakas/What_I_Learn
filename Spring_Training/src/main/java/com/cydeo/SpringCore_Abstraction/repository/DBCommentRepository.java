@@ -8,6 +8,6 @@ public class DBCommentRepository implements com.cydeo.SpringCore_Abstraction.rep
 
     @Override
     public void storeComment(Comment comment) {
-        System.out.println("Storing comment:" + comment.getText());
+        System.out.println("Storing comment... " + comment.getText());
     }
 }

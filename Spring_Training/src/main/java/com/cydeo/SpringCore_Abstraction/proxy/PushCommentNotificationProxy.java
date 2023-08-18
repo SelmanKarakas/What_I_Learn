@@ -6,12 +6,11 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
-@Qualifier("EMAIL")
-public class EmailCommentNotificationProxy implements com.cydeo.SpringCore_Abstraction.proxy.CommentNotificationProxy {
+@Qualifier("PUSH")
+public class PushCommentNotificationProxy implements CommentNotificationProxy{
 
     @Override
     public void sentComment(Comment comment) {
-        System.out.println("Sending notification for comment... " + comment.getText());
+        System.out.println("Sending push notification for comment... " + comment.getText());
     }
 }
