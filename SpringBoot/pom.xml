@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.cydeo</groupId>
-    <artifactId>SpringBoot_Demo</artifactId>
+    <artifactId>SpringBoot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBoot_Demo</name>
     <description>SpringBoot_Demo</description>
