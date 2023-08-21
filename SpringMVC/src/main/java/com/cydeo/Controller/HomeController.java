@@ -26,4 +26,9 @@ public class HomeController {
         return "home.html";
     }
 
+    @RequestMapping("student")
+    public String getStudentPage(){
+        return "student/welcome.html";
+    }
+
 }
