@@ -18,6 +18,7 @@ public class MentorController {
         List<Mentor> mentorList = new ArrayList<>();
         mentorList.add(new Mentor("Selman","Karakas",18, Gender.MALE));
         mentorList.add(new Mentor("Sıla","Karakaş",19, Gender.FEMALE));
+        mentorList.add(new Mentor("Ammy","Bryan",25, Gender.FEMALE));
 
         model.addAttribute("mentors",mentorList);
 
