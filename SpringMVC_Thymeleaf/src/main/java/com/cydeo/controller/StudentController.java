@@ -4,12 +4,13 @@ import com.cydeo.bootstrap.DataGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/student")
 public class StudentController {
 
-    @RequestMapping("/register") //loca
+    @RequestMapping("/register")
     public String register(Model model){
 
         model.addAttribute("students", DataGenerator.createStudent());
@@ -18,10 +19,11 @@ public class StudentController {
         return "student/register";
     }
 
-    @RequestMapping("/drop") //loca
-    public String drop(){
+    @RequestMapping("/welcome")
+    public String welcome(@RequestParam int id){
 
-        return "student/register";
+        System.out.println(id);
+        return "student/welcome";
     }
 
 }
