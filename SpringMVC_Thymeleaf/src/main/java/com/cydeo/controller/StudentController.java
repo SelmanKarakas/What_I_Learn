@@ -14,7 +14,6 @@ public class StudentController {
 
         model.addAttribute("students", DataGenerator.createStudent());
 
-
         return "student/register";
     }
 
