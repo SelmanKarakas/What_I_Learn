@@ -18,5 +18,4 @@ public class DataGenerator {
         );
         return students;
     }
-
 }
