@@ -24,7 +24,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String createEmployee(Model model){
 
         model.addAttribute("employee", new Employee());
@@ -37,6 +37,7 @@ public class EmployeeController {
     public String insertEmployee(@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult,Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("stateList", DataGenerator.gettAllStates());
             return "employee/employee_create";
         }
 

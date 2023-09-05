@@ -14,21 +14,25 @@
 
 <div class="container">
   <div class="d-flex justify-content-center">
-
     <div class="card">
       <h2 class="card-header bg-info text-white p-5">
-        Welcome To Employee Registration Page
+        Welcome to Employee Registration Page
       </h2>
       <div class="card-body">
         <form th:object="${employee}" th:action="@{/employee/insert}" method="post">
           <div class="form-row">
             <div class="form-group col">
-              <label for="inputFirstName4">FirstName</label>
-              <input type="text" class="form-control" id="inputFirstName4" placeholder="FirstName" th:field="*{firstName}">
+              <label for="inputFirstName4">First Name</label>
+              <input type="text" class="form-control" id="inputFirstName4" placeholder="First Name" th:field="*{firstName}">
+              <div class="text-danger" th:if="${#fields.hasErrors('firstName')}">
+                <ol>
+                  <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
+                </ol>
+              </div>
             </div>
             <div class="form-group col">
-              <label for="inputLastName4">LastName</label>
-              <input type="text" class="form-control" id="inputLastName4" placeholder="LastName" th:field="*{lastName}">
+              <label for="inputLastName4">Last Name</label>
+              <input type="text" class="form-control" id="inputLastName4" placeholder="Last Name" th:field="*{lastName}">
             </div>
             <div class="form-group col">
               <label for="inputBirthday4">Birthday</label>
@@ -70,11 +74,9 @@
             </div>
           </div>
           <button type="submit" class="btn btn-danger">Register</button>
-
         </form>
       </div>
     </div>
-
 
   </div>
 </div>
