@@ -1,8 +1,6 @@
 package com.cydeo.enums;
 
-
 public enum Gender {
-
     MALE("Male"),FEMALE("Female");
 
     private String value;
@@ -11,8 +9,7 @@ public enum Gender {
         this.value = value;
     }
 
-    public String getValue(){
+    public String getValue() {
         return value;
     }
-
 }
