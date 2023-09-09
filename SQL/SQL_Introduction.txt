@@ -1,0 +1,24 @@
+select * from employees;
+
+select city
+from locations
+where country_id in ('IT','US','UK');
+
+select *
+from employees
+where job_id = 'IT_PROG';
+
+select count(*)
+from employees
+where job_id = 'IT_PROG';
+
+select count(*)
+from employees
+where salary > 8000;
+
+select count(distinct first_name)
+from employees;
+
+select *
+from employees
+order by salary;
