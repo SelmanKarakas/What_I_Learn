@@ -22,3 +22,7 @@ from employees;
 select *
 from employees
 order by salary;
+
+--get me all employees whose first name starts witch C
+select * from employees
+where first_name like 'C%';
