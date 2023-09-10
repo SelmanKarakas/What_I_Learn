@@ -26,3 +26,45 @@ order by salary;
 --get me all employees whose first name starts witch C
 select * from employees
 where first_name like 'C%';
+
+select * from employees
+where first_name like 'C____';
+
+select * from employees
+where first_name like '_________';
+
+--get me first name where second character is u;
+select *
+from employees
+where first_name like '_u%';
+
+--get me all names where it contains c
+select *
+from employees
+where first_name like  '%c%';
+
+select *
+from employees
+where first_name like '%c%';
+
+--------------------------
+select min(salary)
+from employees;
+
+select sum(salary)
+from employees;
+
+select round(avg(salary))
+from employees;
+
+select round(avg(salary),2)
+from employees;
+
+--how to find who is making highest salary ?
+select max(salary)
+from employees;
+--max is 24000
+
+select *
+from employees
+where salary = (select max(salary)from employees);
