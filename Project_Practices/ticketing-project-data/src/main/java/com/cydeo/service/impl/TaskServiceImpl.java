@@ -30,22 +30,24 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void save(TaskDTO task) {
-        task.setTaskStatus(Status.OPEN);
-        task.setAssignedDate(LocalDate.now());
-        Task task1 = taskMapper.convertToEntity(task);
-        taskRepository.save(task1);
+    public void save(TaskDTO dto) {
+
+        dto.setTaskStatus(Status.OPEN);
+        dto.setAssignedDate(LocalDate.now());
+        Task task = taskMapper.convertToEntity(dto);
+        taskRepository.save(task);
+
     }
 
     @Override
-    public void update(TaskDTO task) {
+    public void update(TaskDTO dto) {
 
-        Optional<Task> task1 = taskRepository.findById(task.getId());
-        Task convertedTask = taskMapper.convertToEntity(task);
+        Optional<Task> task = taskRepository.findById(dto.getId());
+        Task convertedTask  = taskMapper.convertToEntity(dto);
 
-        if (task1.isPresent()){
-            convertedTask.setTaskStatus(task1.get().getTaskStatus());
-            convertedTask.setAssignedDate(task1.get().getAssignedDate());
+        if(task.isPresent()){
+            convertedTask.setTaskStatus(task.get().getTaskStatus());
+            convertedTask.setAssignedDate(task.get().getAssignedDate());
             taskRepository.save(convertedTask);
         }
 
@@ -56,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
 
         Optional<Task> foundTask = taskRepository.findById(id);
 
-        if (foundTask.isPresent()){
+        if(foundTask.isPresent()){
             foundTask.get().setIsDeleted(true);
             taskRepository.save(foundTask.get());
         }
@@ -65,9 +67,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDTO findById(Long id) {
+
         Optional<Task> task = taskRepository.findById(id);
 
-        if (task.isPresent()){
+        if(task.isPresent()){
             return taskMapper.convertToDto(task.get());
         }
         return null;
