@@ -5,6 +5,7 @@ import com.cydeo.dto.TaskDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.entity.Project;
 import com.cydeo.entity.Task;
+import com.cydeo.entity.User;
 import com.cydeo.enums.Status;
 import com.cydeo.mapper.ProjectMapper;
 import com.cydeo.mapper.TaskMapper;
@@ -90,12 +91,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int totalNonCompletedTask(String projectCode) {
-        return taskRepository.totalNonCompletedTask(projectCode);
+        return taskRepository.totalNonCompletedTasks(projectCode);
     }
 
     @Override
     public int totalCompletedTask(String projectCode) {
-        return taskRepository.totalCompletedTask(projectCode);
+        return taskRepository.totalCompletedTasks(projectCode);
     }
 
     @Override
@@ -107,21 +108,19 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void completeByProject(ProjectDTO projectDTO) {
-
         Project project = projectMapper.convertToEntity(projectDTO);
         List<Task> tasks = taskRepository.findAllByProject(project);
         tasks.stream().map(taskMapper::convertToDto).forEach(taskDTO -> {
             taskDTO.setTaskStatus(Status.COMPLETE);
             update(taskDTO);
         });
-
     }
 
     @Override
     public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
         UserDTO loggedInUser = userService.findByUserName("john@employee.com");
         List<Task> tasks = taskRepository.
-                findAllByTaskStatusIsNotAndAssignedEmployee(status,userMapper.convertToEntity(loggedInUser));
+                findAllByTaskStatusIsNotAndAssignedEmployee(status, userMapper.convertToEntity(loggedInUser));
         return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 
@@ -129,7 +128,14 @@ public class TaskServiceImpl implements TaskService {
     public List<TaskDTO> listAllTasksByStatus(Status status) {
         UserDTO loggedInUser = userService.findByUserName("john@employee.com");
         List<Task> tasks = taskRepository.
-                findAllByTaskStatusAndAssignedEmployee(status,userMapper.convertToEntity(loggedInUser));
+                findAllByTaskStatusAndAssignedEmployee(status, userMapper.convertToEntity(loggedInUser));
+        return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskDTO> listAllNonCompletedByAssignedEmployee(UserDTO assignedEmployee) {
+        List<Task> tasks = taskRepository
+                .findAllByTaskStatusIsNotAndAssignedEmployee(Status.COMPLETE, userMapper.convertToEntity(assignedEmployee));
         return tasks.stream().map(taskMapper::convertToDto).collect(Collectors.toList());
     }
 

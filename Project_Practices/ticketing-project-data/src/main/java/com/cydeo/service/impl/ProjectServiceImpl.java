@@ -54,7 +54,6 @@ public class ProjectServiceImpl implements ProjectService {
         dto.setProjectStatus(Status.OPEN);
         Project project = projectMapper.convertToEntity(dto);
         projectRepository.save(project);
-
     }
 
     @Override
@@ -78,22 +77,21 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = projectRepository.findByProjectCode(code);
         project.setIsDeleted(true);
 
-        project.setProjectCode(project.getProjectCode() + "-" + project.getId());
+        project.setProjectCode(project.getProjectCode() + "-" + project.getId());  // SP03-4
 
         projectRepository.save(project);
 
         taskService.deleteByProject(projectMapper.convertToDto(project));
+
     }
 
     @Override
     public void complete(String projectCode) {
-
         Project project = projectRepository.findByProjectCode(projectCode);
         project.setProjectStatus(Status.COMPLETE);
         projectRepository.save(project);
 
         taskService.completeByProject(projectMapper.convertToDto(project));
-
     }
 
     @Override
@@ -104,17 +102,25 @@ public class ProjectServiceImpl implements ProjectService {
 
         List<Project> list = projectRepository.findAllByAssignedManager(user);
 
+
         return list.stream().map(project -> {
 
-            ProjectDTO obj = projectMapper.convertToDto(project);
+                    ProjectDTO obj = projectMapper.convertToDto(project);
 
-            obj.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(project.getProjectCode()));
-            obj.setCompleteTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
+                    obj.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(project.getProjectCode()));
+                    obj.setCompleteTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
 
-            return obj;
-            }
+                    return obj;
+                }
 
         ).collect(Collectors.toList());
-
     }
+
+    @Override
+    public List<ProjectDTO> listAllNonCompletedByAssignedManager(UserDTO assignedManager) {
+        List<Project> projects = projectRepository
+                .findAllByProjectStatusIsNotAndAssignedManager(Status.COMPLETE, userMapper.convertToEntity(assignedManager));
+        return projects.stream().map(projectMapper::convertToDto).collect(Collectors.toList());
+    }
+
 }
