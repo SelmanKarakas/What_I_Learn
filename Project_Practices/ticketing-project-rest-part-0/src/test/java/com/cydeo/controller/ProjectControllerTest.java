@@ -1,6 +1,7 @@
 package com.cydeo.controller;
 import com.cydeo.dto.ProjectDTO;
 import com.cydeo.dto.RoleDTO;
+import com.cydeo.dto.TestResponseDTO;
 import com.cydeo.dto.UserDTO;
 import com.cydeo.enums.Gender;
 import com.cydeo.enums.Status;
@@ -40,7 +41,8 @@ class ProjectControllerTest {
     @BeforeAll
     static void setUp() {
 
-        token = "Bearer " + "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJOZDZvb2lRanZRRlh2eFcwQWg4YUtwZFk2V2ItNVJzZ25idi1fc3JWNmVBIn0.eyJleHAiOjE3MDMzMDU2MDcsImlhdCI6MTcwMzI4NzYwNywianRpIjoiZTI1ZTk4MTktZDQwMS00Y2QwLTlhZjEtYWE5NTZjNmMwM2QzIiwiaXNzIjoiaHR0cDovLzM1LjIwNS4yMzcuOTY6ODA4MC9hdXRoL3JlYWxtcy9jeWRlby1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMTVmNzYxNTAtZmYyOC00OGIyLWEzZGEtM2Q2NDI5Mjk0MjczIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoidGlja2V0aW5nLWFwcCIsInNlc3Npb25fc3RhdGUiOiJhZDNjZjhkNy1mMTFjLTRhNTMtYjc3OS1jODhlZmM0MjVkMzEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4MSJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWN5ZGVvLWRldiIsInVtYV9hdXRob3JpemF0aW9uIiwidGlja2V0aW5nX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsInNpZCI6ImFkM2NmOGQ3LWYxMWMtNGE1My1iNzc5LWM4OGVmYzQyNWQzMSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJtaWtlIiwiZ2l2ZW5fbmFtZSI6IiIsImZhbWlseV9uYW1lIjoiIn0.TeqhZsEMT1BKFc4I-EcJPLs21fRKDAj_EdGxayShfKRKJ3-7nFMspnGjCCgfcxyuY1Neigt44RXuCm5XEXWTju44xa3_oUBm-M6XIiwrhWejGhh1iHZvwgqqs5BQwd9Crr0prp1G9Ie4muIyxEbWSHkFl0KqJdsh5sDCxkvlD57gbVDur0OLtl-u5TzxBI6m0ncuaNp2Iz7q1qwMCCFPNpglCQlKyijiiwO5YEMOFj1qsTV-S0TB2ddTurBzP4-SuHZLQbsD98lwGyQo1ymVQ7QmUQ5baPXRGMAFeansZ4WiOD-1TVbCL5oVzHNZCMl4F9YKTThafpb8ksQnrIYcTw";
+        token = "Bearer " + getToken();
+
         manager = new UserDTO(2L,
                 "",
                 "",
@@ -129,4 +131,35 @@ class ProjectControllerTest {
         return objectMapper.writeValueAsString(obj);
     }
 
+    private static String getToken() {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+
+        map.add("grant_type", "password");
+        map.add("client_id", "ticketing-app");
+        map.add("client_secret", "STjgYZUGExg82jG3ZnnNjIFYMfb54BQe");
+        map.add("username", "ozzy");
+        map.add("password", "abc1");
+        map.add("scope", "openid");
+
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+
+        ResponseEntity<TestResponseDTO> response =
+                restTemplate.exchange("http://35.205.237.96:8080/auth/realms/cydeo-dev/protocol/openid-connect/token",
+                        HttpMethod.POST,
+                        entity,
+                        TestResponseDTO.class);
+
+        if (response.getBody() != null) {
+            return response.getBody().getAccess_token();
+        }
+
+        return "";
+
+    }
 }
