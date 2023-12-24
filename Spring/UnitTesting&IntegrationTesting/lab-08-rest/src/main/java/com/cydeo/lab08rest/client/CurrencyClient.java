@@ -11,6 +11,6 @@ public interface CurrencyClient {
 
     @GetMapping("/live")
     ResponseEntity<CurrencyApiResponse> consumeCurrencyApi(@RequestParam("access_key") String access_key,
-                                                          @RequestParam("currencies") String currencies);
+                                                           @RequestParam("currencies") String currencies);
 
 }
