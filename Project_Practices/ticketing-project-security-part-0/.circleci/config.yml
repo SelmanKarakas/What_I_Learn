@@ -4,10 +4,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:11-jdk
-    working_directory: /tmp/workspace
+    working_directory: /Project_Practices/ticketing-project-security-part-0
     steps:
       - checkout
-      - run: mkdir -p /tmp/workspace
+      - run: mkdir -p /Project_Practices/ticketing-project-security-part-0
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -21,14 +21,14 @@ jobs:
             - ~/.m2
           key: v1-dependencies-{{ checksum "pom.xml" }}
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: /Project_Practices/ticketing-project-security-part-0
           paths: .
   docker-image-and-publish:
     machine: true
     steps:
       - attach_workspace:
-          at: /tmp/workspace
-      - run: ls -a /tmp/workspace
+          at: /Project_Practices/ticketing-project-security-part-0
+      - run: ls -a /Project_Practices/ticketing-project-security-part-0
       - run:
           name: Create Docker image and push to ECR
           command: aws ecr get-login-password --region eu-north-1 | docker login --username AWS --password-stdin 897184280640.dkr.ecr.eu-north-1.amazonaws.com && docker build -t tikcetingapp /tmp/workspace && docker tag tikcetingapp:latest 897184280640.dkr.ecr.eu-north-1.amazonaws.com/tikcetingapp:latest && docker push 897184280640.dkr.ecr.eu-north-1.amazonaws.com/tikcetingapp:latest
