@@ -9,6 +9,9 @@ spring:
           enabled: true
           lower-case-service-id: true
 
+server:
+  port: 8762
+
 eureka:
   instance:
     status-page-url-path: ${management.context-path}/info
