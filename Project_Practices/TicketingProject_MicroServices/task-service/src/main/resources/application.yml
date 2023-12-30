@@ -1,11 +1,11 @@
 spring:
+  application:
+    name: task-service
   sleuth:
     sampler:
       probability: 1
   zipkin:
     base-url: http://host.docker.internal:9411
-  application:
-    name: task-service
   profiles:
     active: default
   jpa:

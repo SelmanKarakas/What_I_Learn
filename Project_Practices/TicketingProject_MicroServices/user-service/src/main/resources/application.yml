@@ -1,11 +1,11 @@
 spring:
+  application:
+    name: user-service
   sleuth:
     sampler:
       probability: 1
   zipkin:
     base-url: http://host.docker.internal:9411
-  application:
-    name: user-service
   profiles:
     active: default
   jpa:
