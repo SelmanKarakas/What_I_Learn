@@ -10,8 +10,11 @@ spring:
           uri: https://github.com/SelmanKarakas101/ticketing-project-microservices-config
           default-label: master
           username: SelmanKarakas101
-          password: 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
+          password: '{cipher}c3b3698b763aa7b9abd407a1e1b1a97c2c6ddae689524381d84da890b51363d3694295bfea7a6ff810f633ee0e5df9c8e83cd869a39ff2e969c6f731e932c8bc'
       fail-fast: true
+
+encrypt:
+  key: cydeo
 
 server:
   port: 8888
