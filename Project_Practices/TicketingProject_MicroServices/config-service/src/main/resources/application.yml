@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/SelmanKarakas101/ticketing-project-microservices-config
+          default-label: master
+          username: SelmanKarakas101
+          password: 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
+      fail-fast: true
+
+server:
+  port: 8888
